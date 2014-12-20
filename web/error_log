@@ -1,0 +1,7 @@
+[20-Dec-2014 14:36:22 America/Denver] PHP Fatal error:  Uncaught exception 'RuntimeException' with message 'Failed to write cache file "/home/mztrib/public_html/dev/orocrm_prod_git/app/cache/dev/classes.php".' in /home/mztrib/public_html/dev/orocrm_prod_git/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/ClassCollectionLoader.php:239
+Stack trace:
+#0 /home/mztrib/public_html/dev/orocrm_prod_git/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/ClassCollectionLoader.php(122): Symfony\Component\ClassLoader\ClassCollectionLoader::writeCacheFile('/home/mztrib/pu...', '<?php \nnamespac...')
+#1 /home/mztrib/public_html/dev/orocrm_prod_git/app/bootstrap.php.cache(2414): Symfony\Component\ClassLoader\ClassCollectionLoader::load(Array, '/home/mztrib/pu...', 'classes', true, false, '.php')
+#2 /home/mztrib/public_html/dev/orocrm_prod_git/app/bootstrap.php.cache(2250): Symfony\Component\HttpKernel\Kernel->doLoadClassCache('classes', '.php')
+#3 /home/mztrib/public_html/dev/orocrm_prod_git/vendor/oro/platform/src/Oro/Bundle/DistributionBundle/OroKernel.php(239):  in /home/mztrib/public_html/dev/orocrm_prod_git/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/ClassCollectionLoader.php on line 239
+[20-Dec-2014 16:14:31 America/Denver] PHP Fatal error:  Class 'Stc\Bundle\SalesBundle\StcSalesBundle' not found in /home/mztrib/public_html/dev/orocrm_prod_git/app/cache/prod/bundles.php on line 83
