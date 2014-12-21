@@ -1,3 +1,0 @@
-[submodule "src/Oro/Bundle/AccountBundle"]
-	path = src/Oro/Bundle/AccountBundle
-	url = git@github.com:orocrm/AccountBundle.git
