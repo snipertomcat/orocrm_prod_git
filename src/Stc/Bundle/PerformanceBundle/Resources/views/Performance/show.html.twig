@@ -1,0 +1,120 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as macros %}
+
+{% set entityId = entity.getId() %}
+
+{% block before_content %}
+    {{ parent() }}
+{% endblock %}
+
+{% block scripts_before %}
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <link id="bs-theme-stylesheet" rel="stylesheet" data-href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" href="data:text/css;charset=utf-8,">
+    <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <script src="http://getbootstrap.com/assets/js/docs.min.js"></script>
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+    {{ parent() }}
+{% endblock %}
+
+{% block container %}
+
+{% endblock %}
+
+{% block content %}
+    {% block navButtons %}
+        {% if resource_granted('EDIT', entity) %}
+            {{ UI.editButton({
+            'path' : path('stc_performance_update', { 'id': entity.id }),
+            'entity_label': 'stc.band.entity.class'|trans
+            }) }}
+        {% endif %}
+    {% endblock navButtons %}
+    <div class="span6" style="float:left">
+        <div class="alert alert-success"><h3><center>General Info</center></h3></div>
+        <div style="font-weight: bold; margin-left: 15px">
+            Name : {{ entity.getName|e }} <br />
+            Description: {{ entity.getDescription }} <br />
+            Performance Type: {{ entity.getPerformanceType }} <br />
+            Bands:
+                <ul class="list-group">
+                    {% for band in entity.getBands %}
+                        <a href="{{ path('stc_band_show', {'id': band.getId} ) }}">
+                            <li class="list-group-item list-group-item-info">{{ band.getName }}</li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            Venue:
+                <ul class="list-group">
+                    <a href="{{ path('stc_venue_view', {'id': entity.getVenueId}) }}">
+                        <li class="list-group-item list-group-item-warning">{{ entity.getVenue }}</li>
+                    </a>
+                </ul>
+            Meals Included? : {{ entity.isMealsIncluded }} <br />
+            Estimated Attendance: {{ entity.getEstimatedAttendance }} <br />
+            Actual Attendance: {{ entity.getActualAttendance }} <br />
+        </div>
+        <br />
+        <div class="alert alert-success"><h3><center>Contracts</center></h3></div>
+        <div style="font-weight: bold; margin-left: 15px">
+            {% if entity.getContracts is not empty %}
+                <ul class="list-group">
+                    {% for contract in entity.getContracts  %}
+                        <a href="{{ path('stc_contract_view', {'id': contract.getId}) }}">
+                            <li class="list-group-item list-group-item-danger">{{ contract.getName }}</li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="span6" style="float: left">
+        <div class="alert alert-success"><h3><center>Budgets & Pricing</center></h3></div>
+        <div style="font-weight: bold; margin-left: 15px">
+            Budget: {{ entity.getBudget }} <br />
+            Performance Fee: {{ entity.getPerformanceFee }} <br />
+            Flight Budget: {{ entity.getFlightBudget }} <br />
+            Rental Car Budget: {{ entity.getRentalCarBudget }} <br />
+            Hotel Budget: {{ entity.getHotelBudget }} <br />
+        </div>
+        <br />
+        <div class="alert alert-success"><h3><center>Dates & Times</center></h3></div>
+        <div style="font-weight: bold">
+            Date of Show: {{ entity.getPerformanceDate|date }} <br />
+            Sound Check Time: {{ entity.getSoundCheckAt }} <br />
+            Performance End Time: {{ entity.getPerformanceEndAt }} <br />
+            Load-In Time: {{ entity.getLoadInAt }} <br />
+            Performance Length (hours): {{ entity.getPerformanceLength }} <br />
+        </div>
+        <br />
+    </div>
+    <div class="span6" style="float: left">
+        <div class="alert alert-success"><h3><center>Notes & Comments</center></h3></div>
+        <div style="font-weight: bold">
+            Post Show Comments: {{ entity.getPostShowComments }} <br />
+            Travel Comments: {{ entity.getTravelComments }} <br />
+            Host Status: {{ entity.getPerformanceHostStatus }} <br />
+        </div>
+        <br />
+        <div class="alert alert-success"><h3><center>Sales Data</center></h3></div>
+        <div style="font-weight: bold">
+            Probability: {{ entity.getProbability }} <br />
+            Total Amount of Contract: {{ entity.getAmount }} <br />
+            Sales Stage: {{ entity.getSalesStage }} <br />
+            Next Step: {{ entity.getNextStep }} <br />
+            Sale Closed At: {{ entity.getClosedAt|date }} <br />
+            Lead Source: {{ entity.getLeadSource }} <br />
+        </div>
+        <br />
+        <div class="alert alert-success"><h3><center>Additional Performance Info</center></h3></div>
+        <div style="font-weight: bold; ">
+            Created At : {{ entity.createdAt|date }} <br />
+            Updated At : {{ entity.getUpdatedAt|date }} <br />
+            Created By : {{ entity.getOwner }} <br />
+            Assigned To : {{ entity.getAssignee }}<br />
+        </div>
+    </div>
+
+{% endblock %}

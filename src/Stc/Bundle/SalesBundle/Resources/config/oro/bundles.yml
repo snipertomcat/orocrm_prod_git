@@ -1,0 +1,2 @@
+bundles:
+    - { name: Stc\Bundle\SalesBundle\StcSalesBundle, priority: 5 }

@@ -1,0 +1,20 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as macros %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+    'entity': performance,
+    'indexPath': path('stc_performance_index'),
+    'indexLabel': 'stc.contact.entity_plural_label'|trans,
+    'entityTitle': performance.name
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+
+{% block content_data %}
+    <li>{{ performance.getName }}</li>
+    <li>{{ performance.getPerformanceDate }}</li>
+
+    {{ parent() }}
+{% endblock content_data %}

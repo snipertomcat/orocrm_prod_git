@@ -1,0 +1,18 @@
+orocrm:
+
+    sales:
+
+        lead:
+
+            desired_start_at.label: Desired Start Date
+            desired_end_at.label: Desired End At
+            sound_check_at.label: Sound Check At
+            load_in_at.label: Load In At
+            budget_total.label: Total Budget
+            budget_meals.label: Total Meals Budget
+            budget_hotels.label: Total Hotels Budget
+            travel_details.label: Travel Details
+            backline.label: Backline
+            ground_transportation.label: Ground Transportation Details
+            per_diem.label: Per Diem
+            deposit.label: Deposit

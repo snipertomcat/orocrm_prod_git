@@ -1,0 +1,3 @@
+# src/Stc/Bundle/ContactBundle/Resources/config/oro/bundles.yml
+bundles:
+    - { name: Stc\Bundle\ContactBundle\StcContactBundle, priority: 65 }

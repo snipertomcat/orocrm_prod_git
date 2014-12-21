@@ -1,0 +1,15 @@
+{% extends 'OroUIBundle:actions:index.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% set gridName = 'stc_googlemap_grid' %}
+
+{% set pageTitle = 'stc.googlemap.entity_plural_label'|trans %}
+
+{% block navButtons %}
+    {% if resource_granted('stc_googlemap_create') %}
+        {{ UI.addButton({
+        'path' : path('stc_googlemap_create'),
+        'entity_label': 'stc.googlemap.entity.label'|trans
+        }) }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+parameters:
+#    stc.form.handler.googlemap.class:                Stc\Bundle\GoogleMapBundle\Form\Handler\GoogleMapHandler
+#    stc.form.type.googlemap.class:                   Stc\Bundle\GoogleMapBundle\Form\Type\GoogleMapType
+#    stc.form.type.googlemap_item.class:              Stc\Bundle\GoogleMapBundle\Form\Type\GoogleMapItemType
+#    stc.form.type.googlemap_item_collection.class:   Stc\Bundle\GoogleMapBundle\Form\Type\GoogleMapItemCollectionType
+    stc.googlemap.data_builder.bands.class: Stc\Bundle\GoogleMapBundle\DataBuilder\BandDataBuilder
+    stc.googlemap.data_builder.venues.class: Stc\Bundle\GoogleMapBundle\DataBuilder\VenueDataBuilder
+
+# @todo define a parent service for the data builders and create child elements for each builder type
+services:
+    stc.googlemap.data_builder.bands:
+        class: %stc.googlemap.data_builder.bands.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @ivory_google_map.map.builder
+            - @ivory_google_map.marker.builder
+
+    stc.googlemap.data_builder.venues:
+        class: %stc.googlemap.data_builder.venues.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @ivory_google_map.map.builder
+            - @ivory_google_map.marker.builder

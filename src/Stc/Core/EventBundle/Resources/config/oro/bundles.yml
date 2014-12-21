@@ -1,0 +1,2 @@
+bundles:
+    - { name: Stc\Core\EventBundle\StcCoreEventBundle, priority: 100 }

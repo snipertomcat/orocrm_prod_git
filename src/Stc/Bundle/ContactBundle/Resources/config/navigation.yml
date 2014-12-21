@@ -1,0 +1,7 @@
+oro_menu_config:
+    items:
+        customers_tab:
+            label: 'orocrm.contact.menu.customers_tab.label'
+            uri: '#'
+            extras:
+                position: 3

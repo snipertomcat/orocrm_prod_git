@@ -1,0 +1,182 @@
+datagrid:
+    stc_performancetwo_grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - performancetwo.id
+                    - performancetwo.name
+                    - performancetwo.description
+                    - performancetwo.deleted
+                    - performancetwo.profileType
+                    - performancetwo.website
+                    - performancetwo.performanceType
+                    - performancetwo.leadSource
+                    - performancetwo.closedAt
+                    - performancetwo.nextStep
+                    - performancetwo.salesStage
+                    - performancetwo.probability
+                    - performancetwo.performanceDate
+                    - performancetwo.performanceLength
+                    - performancetwo.loadInAt
+                    - performancetwo.performanceEndAt
+                    - performancetwo.mealsIncluded
+                    - performancetwo.performanceFee
+                    - performancetwo.budget
+                    - performancetwo.flightBudget
+                    - performancetwo.rentalCarBudget
+                    - performancetwo.hotelBudget
+                    - performancetwo.estimatedAttendance
+                    - performancetwo.actualAttendance
+                    - performancetwo.postShowComments
+                    - performancetwo.travelComments
+                    - performancetwo.soundCheckAt
+                    - performancetwo.performanceHostStatus
+                    - performancetwo.createdAt
+                    - performancetwo.updatedAt
+                    - performancetwo.venue_id
+                from:
+                    - { table: StcPerformanceTwoBundle:PerformanceTwo , alias: performancetwo }
+                where:
+                    and:
+                        - performancetwo.deleted <> 1
+        columns:
+            name:
+                label: Performance Name
+            description:
+                label: Description
+            contacts:
+                label: Contacts
+            assignee:
+                label: Assignee
+            owner:
+                label: Owner
+            venue:
+                label: Venue
+            deleted:
+                label: Deleted
+            profileType:
+                label: Profile Type
+            website:
+                label: Website
+            performanceType:
+                label: Performance Type
+            leadSource:
+                label: Lead Source
+            amount:
+                label: Amount
+            amountUsDollar:
+                label: Amount US Dollar
+            closedAt:
+                label: Closed At
+                frontend_type: datetime
+            nextStep:
+                label: Next Step
+            salesStage:
+                label: Sales Stage
+            probability:
+                label: Probability
+            showDate:
+                label: Show Date
+                frontend_type: datetime
+            performanceDate:
+                label: Performance Date
+                frontend_type: datetime
+            performanceLength:
+                label: Performance Length
+            loadInAt:
+                label: Load In At
+                frontend_type: datetime
+            performanceEndAt:
+                label: Performance Ends At
+                frontend_type: datetime
+            mealsIncluded:
+                label: Meals Included?
+            performanceFee:
+                label: Performance Fee
+            budget:
+                label: Budget
+            flightBudget:
+                label: Flight Budget
+            rentalCarBudget:
+                label: Rental Car Budget
+            hotelBudget:
+                label: Hotel Budget
+            estimatedAttendance:
+                label: Estimated Attendance
+            actualAttendance:
+                label: Actual Attendance
+            postShowComments:
+                label: Show Comments
+            travelComments:
+                label: Travel Comments
+            soundCheckAt:
+                label: Check At
+                frontend_type: datetime
+            performanceHostStatus:
+                label: Performance Host Status
+            createdAt:
+                label: Created At
+                frontend_type: datetime
+            updatedAt:
+                label: Updated At
+                frontend_type: datetime
+            bands:
+                label: Bands
+        properties:
+            id: ~
+            view_link:
+                type: url
+                route: stc_performancetwo_update
+                params: [ id ]
+            update_link:
+                type: url
+                route: stc_performancetwo_update
+                params: [ id ]
+#            delete_link:
+#                type: url
+#                route: stc_api_delete_performancetwo
+#                params: [ id ]
+        sorters:
+            columns:
+                name:
+                    data_name: performancetwo.name
+                website:
+                    data_name: performancetwo.website
+                createdAt:
+                    data_name: performancetwo.createdAt
+                updatedAt:
+                    data_name: performancetwo.updatedAt
+            default:
+                createdAt: DESC
+        filters:
+            columns:
+                name:
+                    type: string
+                    data_name: performancetwo.name
+                createdAt:
+                    type: datetime
+                    data_name: performancetwo.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: performancetwo.updatedAt
+        actions:
+            view:
+                type: navigate
+                label: View Details
+                icon: user
+                link: view_link
+                rowAction: true
+#                acl_resource: stc_performancetwo_view
+            update:
+                type: navigate
+                label: Update PerformanceTwo
+                icon: edit
+                link: update_link
+#                acl_resource: stc_performancetwo_update
+#            delete:
+#                type: delete
+#                label: Delete PerformanceTwo
+#                link: delete_link
+#                icon: trash
+#                acl_resource: stc_api_delete_performancetwo

@@ -1,0 +1,4 @@
+stc_googlemaps_bundle:
+    resource:     "@StcGoogleMapBundle/Controller"
+    type:         annotation
+    prefix:       /googlemap

@@ -1,0 +1,17 @@
+stc:
+    googlemap:
+        entity_plural_label: Google Maps
+        name.label: Name
+        mapType.label: Map Type
+        owner.label: Owner
+        deleted.label: Deleted
+        created_at.label: Created At
+        updated_at.label: Updated At
+        label: Google Map
+
+Oro:
+    datagrid:
+        pagination.label: Pg
+        pagination.totalPages: Pages
+        pagination.totalRecords: Records
+stc.controller.googlemap.saved.message: GoogleMap saved

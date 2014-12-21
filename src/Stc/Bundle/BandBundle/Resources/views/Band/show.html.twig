@@ -1,0 +1,54 @@
+{% extends "OroUIBundle:Default:twoColumnLeft.html.twig" %}
+
+{% set entityId = entity.getId() %}
+
+{% block before_content %}
+    <h4>Genre : {{ entity.genre }}</h4>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="panel">
+    <h3>Main Band Info</h3>
+    <div style="font-weight: bold">
+        Band Name : {{ entity.getName }} <br />
+        Description: {{ entity.getDescription }} <br />
+        Phone: {{ entity.getPhoneOffice }} <br />
+        Website: {{ entity.getWebsite }} <br />
+        Ticker Symbol: {{ entity.getTickerSymbol }} <br />
+        Tribute To : {{ entity.getTributeto }} <br />
+        Act Type: {{ entity.getActtype }} <br />
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <h3>Additional Band Info</h3>
+    <div style="font-weight: bold; ">
+        Created At : {{ entity.createdAt|date }} <br />
+        Updated At : {{ entity.getUpdatedAt|date }} <br />
+        Created By : {{ entity.getOwner }} <br />
+        Profile Type: {{ entity.getProfileType }} <br />
+        Industry: {{ entity.getIndustry }} <br />
+        Annual Revenue: {{ entity.getAnnualRevenue }} <br />
+        Fax : {{ entity.getPhoneFax }} <br />
+        Street Address: {{ entity.getBillingAddressStreet }} <br />
+        City: {{ entity.getBillingAddressCity }} <br />
+        State: {{ entity.getBillingAddressState }} <br />
+        Zip: {{ entity.getBillingAddressPostalcode }} <br />
+        Country: {{ entity.getCountry }} <br />
+        Rating: {{ entity.getRating }} <br />
+        Twitter:        <a href="{{ entity.getTwitter }}"> {{ entity.getTwitter }}</a><br />
+        Facebook:       <a href="{{ entity.getFacebook }}"> {{ entity.getFacebook }}</a><br />
+        Youtube:        <a href="{{ entity.getYoutube }}"> {{ entity.getYoutube }}</a><br />
+        Vimeo :         <a href="{{ entity.getVimeo }}">  {{ entity.getVimeo }}</a><br />
+        Myspace:        <a href="{{ entity.getMyspace }}">  {{ entity.getMyspace }}</a><br />
+        Reverb Nation:  <a href="{{ entity.getReverbNation }}"> {{ entity.getReverbNation }}</a><br />
+        LinkdIn:        <a href="{{ entity.getLinkdin }}"> {{ entity.getLinkdin }}</a><br />
+        GooglePlus:     <a href="{{ entity.getGoogleplus }}"> {{ entity.getGoogleplus }}</a><br />
+        Contacts: <br />
+            {% for contact in entity.getContacts %}
+                {{ contact.getName }} <br />
+                {{ contact.getId }} <br />
+            {% endfor %}
+    </div>
+{% endblock %}

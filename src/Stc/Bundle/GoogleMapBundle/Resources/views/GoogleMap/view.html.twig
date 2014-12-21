@@ -1,0 +1,82 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as macros %}
+
+
+
+{% set fullname = entity|oro_format_name|default('N/A'|trans) %}
+
+{% set audit_entity_class = 'Stc_Bundle_GoogleMapBundle_Entity_GoogleMap' %}
+
+{% block navButtons %}
+    {% if resource_granted('EDIT', entity) %}
+        {{ UI.editButton({
+            'path' : path('stc_googlemaps_map', { map: map }),
+            'entity_label': 'stc.googlemap.entity.class'|trans
+        }) }}
+    {% endif %}
+    {#{% if resource_granted('DELETE', entity) %}
+        {{ UI.deleteButton({
+            'dataUrl': path('oro_api_delete_contact', {'id': entity.id}) ,
+            'dataRedirect': path('orocrm_contact_index'),
+            'aCss': 'no-hash remove-button',
+            'id': 'btn-remove-contact',
+            'dataId': entity.id,
+            'entity_label': 'orocrm.contact.entity_label'|trans,
+        }) }}
+    {% endif %}#}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+        'entity': entity,
+        'indexPath': path('stc_googlemap_index'),
+        'indexLabel': 'stc.googlemap.entity_plural_label'|trans,
+        'entityTitle': fullname
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{#
+
+{% block stats %}
+    {% include 'OroCRMContactBundle:Contact:headerStats.html.twig' with {'entity': entity} %}
+{% endblock stats %}
+#}
+
+{% block content_data %}
+    {% set googlemapInformationWidget %}
+        {{ oro_widget_render({
+            'widgetType': 'block',
+            'contentClasses': [],
+            'url': path('stc_googlemap_view', {id: entity.id}),
+            'title': 'View Googlemap'|trans
+        }) }}
+    {% endset %}
+{#    {% set addressBookWidget %}
+        {{ oro_widget_render({
+            'widgetType': 'block',
+            'contentClasses': [],
+            'url': path('orocrm_contact_address_book', {id: entity.id}),
+            'title': 'Address Book'|trans
+        }) }}
+    {% endset %}#}
+
+
+
+    {% set dataBlocks = [
+        {
+            'title': 'General Information',
+            'class': 'active',
+            'subblocks': [
+                {'data' : [mapInformationWidget]},
+            ]
+        }
+    ] %}
+
+
+    {{ mapMacro.map_display(map|raw) }}
+    {% set id = 'googlemapView' %}
+    {% set data = {'dataBlocks': dataBlocks} %}
+    {{ parent() }}
+
+{% endblock content_data %}

@@ -1,0 +1,138 @@
+{% extends 'OroUIBundle:actions:update.html.twig' %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+{% oro_title_set({params : {"%entity.name%": entity.name, "%entityName%": 'stc.performance.entity.label'|trans }}) %}
+
+{% set gridName = 'stc-performance-grid' %}
+
+{% set entityId = app.request.get('id') %}
+
+{% set formAction = entityId ? path('stc_performance_update', { 'id': entityId}) : path('stc_performance_create') %}
+
+{% block navButtons %}
+    {% if resource_granted('stc_performance_update') %}
+        {{ UI.saveAndStayButton() }}
+    {% endif %}
+    {{ UI.saveAndCloseButton() }}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+
+    {% if entityId %}
+        {% set breadcrumbs = {
+        'entity': form.vars.value,
+        'indexPath': path('stc_performance_index'),
+        'indexLabel': 'stc.performance.entity_plural_label'|trans,
+        'entityTitle': form.vars.value.name
+        } %}
+        {{ parent() }}
+    {% else %}
+        {% include 'OroUIBundle::page_title_block.html.twig' %}
+    {% endif %}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% set id = 'performance-form' %}
+
+    {% set dataBlocks = [{
+    'title': 'stc.performance.block.general'|trans,
+    'class': 'active',
+    'subblocks': [
+    {
+    'title': '',
+    'data': [
+    form_row(form.name),
+    form_row(form.description),
+    form_row(form.owner),
+    form_row(form.assignee),
+    form_row(form.performanceType),
+    form_row(form.bands),
+    form_row(form.venue),
+    form_row(form.mealsIncluded),
+    form_row(form.estimatedAttendance),
+    form_row(form.actualAttendance)
+    ]
+    }
+    ]
+    }] %}
+
+    {% set dataBlocks = dataBlocks|merge([{
+        'title' : 'stc.performance.cost_title.label'|trans,
+        'subblocks' : [{
+            'title' : null,
+            'useSpan' : false,
+            'data' : [
+                form_row(form.budget),
+                form_row(form.performanceFee),
+                form_row(form.flightBudget),
+                form_row(form.rentalCarBudget),
+                form_row(form.hotelBudget)
+            ]
+        }]
+    }] )
+    %}
+    {% set dataBlocks = dataBlocks|merge([{
+        'title' : 'stc.performance.comments_title.label'|trans,
+        'subblocks' : [{
+            'title' : null,
+            'useSpan' : false,
+            'data' : [
+                form_row(form.postShowComments),
+                form_row(form.travelComments),
+                form_row(form.performanceHostStatus)
+            ]
+        }]
+    }]) %}
+    {% set dataBlocks = dataBlocks|merge([{
+        'title' : 'stc.performance.date_time_title.label'|trans,
+        'subblocks' : [{
+            'title' : null,
+            'useSpan' : false,
+            'data' : [
+                form_row(form.performanceDate),
+                form_row(form.soundCheckAt),
+                form_row(form.performanceEndAt),
+                form_row(form.loadInAt),
+                form_row(form.performanceLength)
+            ]
+        }]
+    }]) %}
+    {% set dataBlocks = dataBlocks|merge([{
+        'title' : 'stc.performance.sales_data_title.label'|trans,
+        'subblocks' : [{
+            'title' : null,
+            'useSpan' : false,
+            'data' : [
+                form_row(form.probability),
+                form_row(form.amount),
+                form_row(form.salesStage),
+                form_row(form.nextStep),
+                form_row(form.closedAt),
+                form_row(form.leadSource)
+            ]
+        }]
+    }]) %}
+
+    {# This is required to show extended fields #}
+    {% if form.additional is defined and form.additional.children|length > 0 %}
+        {% set additionalData = [] %}
+        {% for value in form.additional %}
+            {% set additionalData = additionalData|merge([form_row(value)]) %}
+        {% endfor %}
+
+        {% set dataBlocks = dataBlocks|merge([{
+        'title': 'stc.venue.block.additional'|trans,
+        'subblocks': [{
+        'title': '',
+        'useSpan': false,
+        'data' : additionalData
+        }]
+        }] ) %}
+    {% endif %}
+
+    {% set data = {
+    'formErrors': form_errors(form)? form_errors(form) : null,
+    'dataBlocks': dataBlocks,
+    } %}
+    {{ parent() }}
+{% endblock content_data %}

@@ -1,0 +1,25 @@
+oro_menu_config:
+    items:
+        stc_tab:
+            label: Google Maps
+            uri: '#'
+            extras:
+                position: 5
+                icon: icon-map-marker
+        stc_googlemap_list:
+            label: GoogleMaps
+            route: stc_googlemap_index
+            extras:
+                routes: ['stc_googlemap_*']
+                description: List of googlemaps
+    tree:
+        application_menu:
+            children:
+                stc_tab:
+                    children:
+                        stc_googlemap_list: ~
+
+oro_titles:
+    stc_googlemap_index:  ~
+    stc_googlemap_create: Create googlemap
+    stc_googlemap_update: %%googlemap.label%% - Edit

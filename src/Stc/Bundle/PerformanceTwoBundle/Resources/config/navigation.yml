@@ -1,0 +1,18 @@
+oro_menu_config:
+    items:
+        performancetwo_tab:
+            label: PerformanceTwos
+            uri: '#'
+        shortcut_performancetwo_item:
+            label: View PerformanceTwos
+            route: stc_performancetwo_index
+        shortcut_performancetwo_create:
+            label: Create PerformanceTwo
+            route: stc_performancetwo_create
+    tree:
+        application_menu:
+            children:
+                performancetwo_tab:
+                    children:
+                        shortcut_performancetwo_item: ~
+                        shortcut_performancetwo_create: ~

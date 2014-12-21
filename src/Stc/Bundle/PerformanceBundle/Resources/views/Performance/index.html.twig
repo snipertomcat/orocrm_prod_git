@@ -1,0 +1,92 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as macros %}
+
+{% set fullname = page_data.entity_name|oro_format_name|default('N/A'|trans) %}
+
+{% set audit_entity_class = 'Stc_Bundle_PerformanceBundle_Entity_Performance' %}
+
+{% block navButtons %}
+    {% if resource_granted('stc_performance_create') %}
+        <a href="{{ url('stc_performance_create') }}">{{ UI.addButton({
+        'path' : path('stc_performance_create'),
+        'entity_label': 'stc.performance.entity.label'|trans
+        }) }}</a>
+    {% endif %}
+{% endblock %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+    'entity': entity,
+    'indexPath': path('stc_performance_index'),
+    'indexLabel': 'stc.performance.entity_plural_label'|trans,
+    'entityTitle': fullname
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{#
+
+{% block stats %}
+    {% include 'OroCRMContactBundle:Contact:headerStats.html.twig' with {'entity': entity} %}
+{% endblock stats %}
+#}
+
+{% block content_data %}
+    <style>
+        .stc-box {
+            border: 1px solid #0000ff;
+            float: left;
+            margin-left: 15px;
+            margin-top: 5px;
+            width: 250px;
+            height: 500px;
+        }
+    </style>
+    <script type="text/javascript">
+        require(['jquery', 'jquery-ui', 'bootstrap'], function(){});
+    </script>
+    {% set performanceInformationWidget %}
+
+        <div class="row">
+            {% for perf in page_data.performances %}
+                <div class="panel panel-primary">
+                    <div class="box-type1 dashboard-widget">
+                        <div class="item" style="float:left;">
+                            <div class="stc-box" style="text-align: center; font-weight: bold;">
+                                {{ perf.name }}<br />
+                                <h5>{{ perf.performanceDate|date }}</h5><br />
+                                <h4><u><i><a href="{{ url('stc_performance_show', {id: perf.id}) }}">{{ perf.venue }}</a></i></u></h4>
+                                    {% for band in perf.bands %}
+                                        <a href="{{ url('stc_band_show', {id: band.id}) }}"><h4 style="color: darkgreen">{{ band.name }}</h4></a>
+                                        <h5 style="color: darkblue; text-align: left;">{ {{ band.getTributeto }} }</h5>
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endset %}
+    {#    {% set addressBookWidget %}
+            {{ oro_widget_render({
+                'widgetType': 'block',
+                'contentClasses': [],
+                'url': path('orocrm_contact_address_book', {id: entity.id}),
+                'title': 'Address Book'|trans
+            }) }}
+        {% endset %}#}
+
+    {% set dataBlocks = [
+    {
+    'title': ''|trans,
+    'class': 'active',
+    'subblocks': [
+    {'data' : [performanceInformationWidget] }
+    ]
+    }
+    ] %}
+
+    {% set id = 'performanceView' %}
+    {% set data = {'dataBlocks': dataBlocks} %}
+    {{ parent() }}
+{% endblock content_data %}

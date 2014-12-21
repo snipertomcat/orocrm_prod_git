@@ -1,0 +1,96 @@
+datagrid:
+    stc_googlemap_grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - googlemap.id
+                    - googlemap.name
+                    - googlemap.mapType
+                    - googlemap.deleted
+#                    - googlemap.coordinates
+                    - googlemap.createdAt
+                    - googlemap.updatedAt
+                from:
+                    - { table: StcGoogleMapBundle:GoogleMap , alias: googlemap }
+                where:
+                    and:
+                        - googlemap.deleted <> 1
+        columns:
+            name:
+                label: stc.googlemap.name.label
+            mapType:
+                label: stc.googlemap.mapType.label
+            owner:
+                label: stc.googlemap.owner.label
+            deleted:
+                label: stc.googlemap.deleted.label
+#            coordinates:
+#                label: stc.googlemap.coordinate.label.plural
+            createdAt:
+                label: stc.googlemap.created_at.label
+                frontend_type: datetime
+            updatedAt:
+                label: stc.googlemap.updated_at.label
+                frontend_type: datetime
+        properties:
+            id: ~
+            view_link:
+                type: url
+                route: stc_googlemap_update
+                params: [ id ]
+            update_link:
+                type: url
+                route: stc_googlemap_update
+                params: [ id ]
+#            delete_link:
+#                type: url
+#                route: stc_api_delete_googlemap
+#                params: [ id ]
+        sorters:
+            columns:
+                name:
+                    data_name: googlemap.name
+                mapType:
+                    data_name: googlemap.mapType
+                createdAt:
+                    data_name: googlemap.createdAt
+                updatedAt:
+                    data_name: googlemap.updatedAt
+            default:
+                createdAt: DESC
+        filters:
+            columns:
+                name:
+                    type: string
+                    data_name: googlemap.name
+                mapType:
+                    type: string
+                    data_name: googlemap.mapType
+                createdAt:
+                    type: datetime
+                    data_name: googlemap.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: googlemap.updatedAt
+        actions:
+            view:
+                type: navigate
+                label: View Map
+                icon: user
+                link: view_link
+                rowAction: true
+#                acl_resource: stc_googlemap_view
+            update:
+                type: navigate
+                label: View Map
+                icon: edit
+                link: view_link
+                rowAction: true
+#                acl_resource: stc_googlemap_update
+#            delete:
+#                type: delete
+#                label: Delete Venue
+#                link: delete_link
+#                icon: trash
+#                acl_resource: stc_api_delete_googlemap

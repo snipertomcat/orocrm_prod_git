@@ -1,0 +1,16 @@
+Stc\Bundle\GoogleMapBundle\Entity\GoogleMap:
+    properties:
+        label:
+            - NotBlank: ~
+        items:
+            - Count:
+                min: 1
+
+Stc\Bundle\GoogleMapBundle\Entity\GoogleMapItem:
+    properties:
+        qty:
+            - Range:
+                min: 0
+            - NotBlank: ~
+        product:
+            - NotBlank: ~
